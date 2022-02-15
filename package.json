@@ -1,5 +1,5 @@
 {
-	"name": "node-system-dialog",
+	"name": "node-native-dialog",
 	"version": "1.0.0",
 	"description": "System native dialogs implementation with Node",
 	"main": "index.js",
@@ -9,15 +9,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/56789a1987/node-system-dialog.git"
+		"url": "git://github.com/56789a1987/node-native-dialog.git"
 	},
 	"keywords": [],
 	"author": "56789a1987",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/56789a1987/node-system-dialog/issues"
+		"url": "https://github.com/56789a1987/node-native-dialog/issues"
 	},
-	"homepage": "https://github.com/56789a1987/node-system-dialog",
+	"homepage": "https://github.com/56789a1987/node-native-dialog",
 	"dependencies": {
 		"iconv-lite": "^0.6.3"
 	}

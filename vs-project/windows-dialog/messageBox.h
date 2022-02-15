@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "utils.h"
 
 VOID showInfoMessage(CHAR* text, CHAR* title);

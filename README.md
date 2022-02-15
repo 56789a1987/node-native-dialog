@@ -1,4 +1,4 @@
-# node-system-dialog
+# node-native-dialog
 
 Display native message boxes / common dialogs.
 
@@ -19,7 +19,7 @@ Supported platforms:
 Import it to your script.
 
 ```js
-const dialog = require('node-system-dialog');
+const dialog = require('node-native-dialog');
 ```
 
 Display a simple message box
