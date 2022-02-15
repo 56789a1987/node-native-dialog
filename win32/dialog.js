@@ -19,32 +19,32 @@ const DialogType = {
 
 const info = async (text, title) => {
 	await run([DialogType.Info, `${text}`, `${title}`]);
-}
+};
 
 const error = async (text, title) => {
 	await run([DialogType.Error, `${text}`, `${title}`]);
-}
+};
 
 const warning = async (text, title) => {
 	await run([DialogType.Warning, `${text}`, `${title}`]);
-}
+};
 
 const question = async (text, title) => {
 	const result = await run([DialogType.Question, `${text}`, `${title}`]);
 	return result.code === 0;
-}
+};
 
 const entry = async (text, title, _default = '') => {
 	const result = await run([DialogType.Entry, `${text}`, `${title}`, `${_default}`]);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 const password = async (text, title, _default = '') => {
 	const result = await run([DialogType.Password, `${text}`, `${title}`, `${_default}`]);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
-function exhangeEndian(color) {
+function exchangeEndian(color) {
 	color = color >>> 0;
 	return ((color & 0xff) << 16) | (color & 0xff00) | ((color & 0xff0000) >>> 16);
 }
@@ -55,18 +55,18 @@ const color = async (options) => {
 		args.push('-f');
 	}
 	if (options.color !== undefined) {
-		const color = exhangeEndian(options.color);
+		const color = exchangeEndian(options.color);
 		args.push('-c', `${color}`);
 	}
 	if (Array.isArray(options.templates)) {
 		args.push('-t');
 		for (let i = 0; i < 16; i++) {
-			args.push(`${exhangeEndian(options.templates[i] || 0)}`);
+			args.push(`${exchangeEndian(options.templates[i] || 0)}`);
 		}
 	}
 	const result = await run(args);
-	return result.code === 0 ? exhangeEndian(parseInt(result.stdout, 10)) : null;
-}
+	return result.code === 0 ? exchangeEndian(parseInt(result.stdout, 10)) : null;
+};
 
 function toFilters(filters) {
 	let result = '';
@@ -111,7 +111,7 @@ const open = async (options) => {
 	} else {
 		return result.stdout;
 	}
-}
+};
 
 const save = async (options) => {
 	const args = [DialogType.Save];
@@ -129,7 +129,7 @@ const save = async (options) => {
 	}
 	const result = await run(args);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 const directory = async (options) => {
 	const args = [DialogType.Directory];
@@ -141,7 +141,7 @@ const directory = async (options) => {
 	}
 	const result = await run(args);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 module.exports = {
 	info, error, warning, question, entry, password, color, open, save, directory

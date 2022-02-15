@@ -25,7 +25,7 @@ module.exports.runAsync = (command, args) => new Promise((resolve, reject) => {
 });
 
 const unsupported = () => {
-	throw new Error('Your OS platform is not yet supported')
+	throw new Error('Your OS platform is not yet supported');
 }
 
 module.exports.unsupportedPlatform = {

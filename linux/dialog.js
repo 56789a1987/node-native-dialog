@@ -8,7 +8,7 @@ const info = async (text, title) => {
 		'--text', `${text}`,
 		'--title', `${title}`,
 	]);
-}
+};
 
 const error = async (text, title) => {
 	await run([
@@ -16,7 +16,7 @@ const error = async (text, title) => {
 		'--text', `${text}`,
 		'--title', `${title}`,
 	]);
-}
+};
 
 const warning = async (text, title) => {
 	await run([
@@ -24,7 +24,7 @@ const warning = async (text, title) => {
 		'--text', `${text}`,
 		'--title', `${title}`,
 	]);
-}
+};
 
 const question = async (text, title) => {
 	const result = await run([
@@ -33,7 +33,7 @@ const question = async (text, title) => {
 		'--title', `${title}`,
 	]);
 	return result.code === 0;
-}
+};
 
 const entry = async (text, title, _default = '') => {
 	const result = await run([
@@ -43,7 +43,7 @@ const entry = async (text, title, _default = '') => {
 		'--entry-text', `${_default}`,
 	]);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 const password = async (text, title, _default = '') => {
 	const result = await run([
@@ -53,7 +53,7 @@ const password = async (text, title, _default = '') => {
 		'--entry-text', `${_default}`,
 	]);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 const color = async (options) => {
 	const args = ['--color-selection'];
@@ -72,7 +72,7 @@ const color = async (options) => {
 	} else {
 		return null;
 	}
-}
+};
 
 function addFilters(args, filters) {
 	for (let i = 0; i < filters.length; i++) {
@@ -103,7 +103,7 @@ const open = async (options) => {
 	} else {
 		return result.stdout;
 	}
-}
+};
 
 const save = async (options) => {
 	const args = ['--file-selection', '--save', '--confirm-overwrite'];
@@ -118,7 +118,7 @@ const save = async (options) => {
 	}
 	const result = await run(args);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 const directory = async (options) => {
 	const args = ['--file-selection', '--directory'];
@@ -130,7 +130,7 @@ const directory = async (options) => {
 	}
 	const result = await run(args);
 	return result.code === 0 ? result.stdout : null;
-}
+};
 
 module.exports = {
 	info, error, warning, question, entry, password, color, open, save, directory

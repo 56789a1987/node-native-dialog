@@ -127,7 +127,7 @@ dialog.info('Hello world!', 'Message');
   ```js
   open({
   	filters: [
-  		['Image files (*.png, *.jpg, *.gif, *.bmp)', '*.png', '*.jpg', '*.gif', '*bmp'],
+  		['Image files (*.png, *.jpg, *.gif, *.bmp)', '*.png', '*.jpg', '*.gif', '*.bmp'],
   		['All files (*.*)', '*.*'],
   	]
   })
@@ -157,7 +157,7 @@ dialog.info('Hello world!', 'Message');
 
   For example in simplified Chinese locale (GB2312 encoding), you need to use `setEncoding('gbk')` if unicode characters are incorrect in return values.
 
-*Example scripts are available in /examples, you can try them out by yourself*
+*Example scripts are available in /examples, you can try them out by yourself.*
 
 ## Compile the Windows version from source
 
@@ -169,7 +169,7 @@ You can also use MinGW to build. To do so, you need to have [mingw-w64](https://
 
 - This is still experimental and there might be issues.
 
-- The promise rejects if the dialog process fails to start or exits unexpectedly. Add error handling if you're using it in a fatal process.
+- The promise rejects if the dialog process fails to start or exits unexpectedly. Add error handling if you're using it in a critical process.
 
 ## Contributing
 
