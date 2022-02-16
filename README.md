@@ -22,7 +22,7 @@ Import it to your script.
 const dialog = require('node-native-dialog');
 ```
 
-Display a simple message box
+Display a simple message box.
 
 ```js
 dialog.info('Hello world!', 'Message');
@@ -36,9 +36,9 @@ dialog.info('Hello world!', 'Message');
 
 - **warning(text, title): Promise&lt;void&gt;**
 
-  `text` - string, required, the message
+  - `text` - string, required, the message
 
-  `title` - string, required, title of the dialog box
+  - `title` - string, required, title of the dialog box
 
   Display a simple information / error / warning message box. The promise will resolve after the message box is closed.
 
@@ -50,11 +50,11 @@ dialog.info('Hello world!', 'Message');
 
 - **question(text, title): Promise&lt;boolean&gt;**
 
-  `text` - string, required, the message
+  - `text` - string, required, the message
 
-  `title` - string, required, title of the dialog box
+  - `title` - string, required, title of the dialog box
 
-  Display a OK/Cancel message box. Return true if OK is clicked. Return false if Cancel is clicked or the window is closed.
+  Display a OK/Cancel message box. Return true if OK is clicked. Return false if Cancel is clicked.
 
   ![question](examples/images/question.png)
 
@@ -66,13 +66,13 @@ dialog.info('Hello world!', 'Message');
 
 - **password(text, title, default): Promise&lt;string | null&gt;**
 
-  `text` - string, required, the message
+  - `text` - string, required, the message
 
-  `title` - string, required, title of the dialog box
+  - `title` - string, required, title of the dialog box
 
-  `default` - string, optional, the default value of the text box
+  - `default` - string, optional, the default value of the text box
 
-  Display a message box that user can enter text in it. Return the text if OK is clicked. Return null if Cancel is clicked or the window is closed.
+  Display a message box that user can enter text in it. Return the text if OK is clicked. Return null if Cancel is clicked.
 
   If `password` is used, the text box is a password box, characters are '*'.
 
@@ -86,13 +86,13 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  `full` - boolean, optional, expand the full color picker by default
+  - `full` - boolean, optional, expand the full color picker by default
 
-  `color` - number, optional, the default selected color
+  - `color` - number, optional, the default selected color
 
-  `templates` - optional, an array of colors to display in the "Custom colors" field, 16 items at most, Windows only
+  - `templates` - optional, an array of colors to display in the "Custom colors" field, 16 items at most, Windows only
 
-  Display the color picker dialog. Return the color if OK is clicked. Return null if Cancel is clicked or the window is closed.
+  Display the color picker dialog. Return the color if OK is clicked. Return null if Cancel is clicked.
 
   Colors are in `0xRRGGBB` format.
 
@@ -108,17 +108,17 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  `multiple` - boolean, optional, Open Dialog only, allow selecting multiple files
+  - `multiple` - boolean, optional, Open Dialog only, allow selecting multiple files
 
-  `name` - string, optional, the default file name
+  - `name` - string, optional, the default file name
 
-  `title` - string, optional, set the title of the file dialog
+  - `title` - string, optional, set the title of the file dialog
 
-  `initial` - string, optional, specify the initial directory when the dialog appears
+  - `initial` - string, optional, specify the initial directory when the dialog appears
 
-  `filters` - optional, an array of file name filters (`[description, pattern 1, pattern 2, ...]`)
+  - `filters` - optional, an array of file name filters (`[description, pattern 1, pattern 2, ...]`)
 
-  Display the open / save file dialog. Return the absolute path if Open / Save is clicked. Return null if Cancel is clicked or the window is closed.
+  Display the open / save file dialog. Return the absolute path if Open / Save is clicked. Return null if Cancel is clicked.
 
   If `multiple` is set to true for the open file dialog, the return value is an array of file paths.
 
@@ -137,11 +137,11 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  `title` - string, optional, text to be displayed on the banner of the dialog
+  - `title` - string, optional, text to be displayed on the banner of the dialog
 
-  `initial` - string, optional, specify the initial directory when the dialog appears
+  - `initial` - string, optional, specify the initial directory when the dialog appears
 
-  Display a file dialog that can only select folders. Return the absolute path if OK is clicked. Return null if Cancel is clicked or the window is closed.
+  Display a file dialog that can only select folders. Return the absolute path if OK is clicked. Return null if Cancel is clicked.
 
   ![directory](examples/images/directory.png)
 
@@ -149,15 +149,49 @@ dialog.info('Hello world!', 'Message');
   directory({ title: 'Choose a folder to store your configuration' })
   ```
 
+- **progress(options): instance**
+
+  *options:*
+
+  - `text` - string, required, the message
+
+  - `title` - string, required, title of the dialog box
+
+  - `value` - number, optional, the initial progress percentage
+
+  - `indeterminate` - boolean, optional, make the progress bar a marquee instead of the exact value, until `finish()` is called
+
+  - `autoClose` - boolean, optional, close the dialog automatically when `finish()` is called
+
+  - `noCancel` - boolean, optional, remove the cancel button, the dialog can only be closed when the progress is 100%
+
+  *instance:*
+
+  - `promise` - the original promise, resolves with true if OK is clicked, or false if Cancel is clicked
+
+  - `setText(text)` - change the message
+
+  - `setValue(value)` - change the progress percentage
+
+  - `finish()` - set the percentage to 100%, this also disables the Cancel button and makes it stop accepting new values
+
+  Display an OK / Cancel dialog with a progress bar. The OK button can only be clicked when the progress is 100%.
+
+  ![progress](examples/images/progress.png)
+
+   ```js
+  progress({ title: 'Installing', text: 'Copying files...', value: 50 })
+  ```
+
 - **setEncoding(encoding)**
 
-  `encoding` - string, optional, the encoding to use, or undefined to disable character transcoding
+  - `encoding` - string, optional, the encoding to use, or undefined to disable character transcoding
 
   Specify the encoding of the console. Unicode characters may display incorrectly on Windows in some locales due to console encoding mismatch.
 
   For example in simplified Chinese locale (GB2312 encoding), you need to use `setEncoding('gbk')` if unicode characters are incorrect in return values.
 
-*Example scripts are available in /examples, you can try them out by yourself.*
+*Example scripts are available in `/examples`, you can try them out by yourself.*
 
 ## Compile the Windows version from source
 

@@ -157,6 +157,7 @@
     <ClCompile Include="openFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="progressBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="browseFolder.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="messageBox.h" />
     <ClInclude Include="openFile.h" />
+    <ClInclude Include="progressBox.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="winres.h" />

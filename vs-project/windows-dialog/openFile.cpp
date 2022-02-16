@@ -18,7 +18,7 @@ VOID showOpenFile(CONST BOOL save, INT argc, CHAR* argv[]) {
 
 		switch (arg[1]) {
 		case 'm':
-			multiple = true;
+			multiple = TRUE;
 			break;
 		case 'n':
 			toWideChar(output, argv[++i]);
@@ -35,7 +35,7 @@ VOID showOpenFile(CONST BOOL save, INT argc, CHAR* argv[]) {
 			toWideChar(filters, argv[++i]);
 			ofn.lpstrFilter = filters;
 			for (INT i = 0; i < sizeof(filters); i++) {
-				if (filters[i] == '|') filters[i] = NULL;
+				if (filters[i] == '|') filters[i] = '\0';
 			}
 			break;
 		}

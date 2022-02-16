@@ -1,21 +1,9 @@
 #include "inputBox.h"
 
-VOID localizeWindow(HWND hwnd) {
-	HMODULE hMUser32 = LoadLibraryExW(L"user32.dll", NULL, LOAD_LIBRARY_AS_DATAFILE);
-	if (hMUser32) {
-		WCHAR tOK[64], tCancel[64];
-		LoadStringW(hMUser32, 800, tOK, _countof(tOK));
-		LoadStringW(hMUser32, 801, tCancel, _countof(tCancel));
-		FreeLibrary(hMUser32);
-		SetWindowTextW(GetDlgItem(hwnd, IDOK), tOK);
-		SetWindowTextW(GetDlgItem(hwnd, IDCANCEL), tCancel);
-	}
-}
-
 VOID getResult(HWND hwnd) {
 	WCHAR wResult[1024];
 	HWND inputEdit = GetDlgItem(hwnd, IDC_INPUT_BOX_EDIT);
-	GetWindowTextW(inputEdit, wResult, GetWindowTextLengthW(inputEdit) + 1);
+	GetWindowTextW(inputEdit, wResult, _countof(wResult));
 	wprintf(L"%s", wResult);
 }
 
@@ -32,16 +20,14 @@ INT_PTR CALLBACK inputBoxProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 		return TRUE;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
-		case IDOK: {
+		case IDOK:
 			getResult(hwnd);
 			DestroyWindow(hwnd);
 			return TRUE;
-		}
-		case IDCANCEL: {
+		case IDCANCEL:
 			setExitCode(1);
 			DestroyWindow(hwnd);
 			return TRUE;
-		}
 		}
 	}
 	return FALSE;
@@ -53,7 +39,7 @@ VOID showInputBox(CHAR* text, CHAR* title, CHAR* initial, BOOL password) {
 	toWideChar(wTitle, title);
 	toWideChar(wInitial, initial);
 
-	HWND inputBox = CreateDialogW(GetModuleHandleW(NULL), MAKEINTRESOURCEW(IDD_INPUTBOX), NULL, inputBoxProc);
+	HWND inputBox = CreateDialogW(GetModuleHandleW(NULL), MAKEINTRESOURCEW(IDD_INPUT_BOX), NULL, inputBoxProc);
 	HWND inputEdit = GetDlgItem(inputBox, IDC_INPUT_BOX_EDIT);
 
 	SetWindowTextW(inputBox, wTitle);

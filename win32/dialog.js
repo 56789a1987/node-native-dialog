@@ -1,8 +1,9 @@
 const path = require('path');
-const { runAsync } = require('../utils');
+const { runAsync, runWithStdin } = require('../utils');
 
 const command = path.join(__dirname, 'dialog');
 const run = (args) => runAsync(command, args);
+const runStdin = (args) => runWithStdin(command, args);
 
 const DialogType = {
 	Info: '0',
@@ -15,6 +16,7 @@ const DialogType = {
 	Open: '7',
 	Save: '8',
 	Directory: '9',
+	Progress: 'A',
 };
 
 const info = async (text, title) => {
@@ -143,6 +145,46 @@ const directory = async (options) => {
 	return result.code === 0 ? result.stdout : null;
 };
 
+function clampValue(value) {
+	value = value | 0;
+	return value < 0 ? 0 : value > 100 ? 100 : value;
+}
+
+const progress = (options) => {
+	const args = [DialogType.Progress];
+	if (options.title !== undefined) {
+		args.push('-t', `${options.title}`);
+	}
+	if (options.text !== undefined) {
+		args.push('-m', `${options.text}`);
+	}
+	if (options.value !== undefined) {
+		args.push('-p', clampValue(options.value));
+	}
+	if (options.indeterminate) {
+		args.push('-i');
+	}
+	if (options.autoClose) {
+		args.push('-a');
+	}
+	if (options.noCancel) {
+		args.push('-n');
+	}
+	const instance = runStdin(args);
+	return {
+		promise: instance.promise.then(result => result.code === 0),
+		setText: (text) => {
+			instance.stdinWrite(`# ${text}`.replace(/\r?\n/g, ' '));
+		},
+		setValue: (value) => {
+			instance.stdinWrite(`${clampValue(value)}`);
+		},
+		finish: () => {
+			instance.stdinWrite('-');
+		}
+	};
+};
+
 module.exports = {
-	info, error, warning, question, entry, password, color, open, save, directory
+	info, error, warning, question, entry, password, color, open, save, directory, progress
 };

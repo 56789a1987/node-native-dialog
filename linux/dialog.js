@@ -1,6 +1,7 @@
-const { runAsync } = require('../utils');
+const { runAsync, runWithStdin } = require('../utils');
 
 const run = (args) => runAsync('zenity', args);
+const runStdin = (args) => runWithStdin('zenity', args);
 
 const info = async (text, title) => {
 	await run([
@@ -132,6 +133,46 @@ const directory = async (options) => {
 	return result.code === 0 ? result.stdout : null;
 };
 
+function clampValue(value) {
+	value = value | 0;
+	return value < 0 ? 0 : value > 100 ? 100 : value;
+}
+
+const progress = (options) => {
+	const args = ['--progress'];
+	if (options.title !== undefined) {
+		args.push('--title', `${options.title}`);
+	}
+	if (options.text !== undefined) {
+		args.push('--text', `${options.text}`);
+	}
+	if (options.value !== undefined) {
+		args.push('--percentage', clampValue(options.value));
+	}
+	if (options.indeterminate) {
+		args.push('--pulsate');
+	}
+	if (options.autoClose) {
+		args.push('--auto-close');
+	}
+	if (options.noCancel) {
+		args.push('--no-cancel');
+	}
+	const instance = runStdin(args);
+	return {
+		promise: instance.promise.then(result => result.code === 0),
+		setText: (text) => {
+			instance.stdinWrite(`# ${text}`.replace(/\r?\n/g, ' '));
+		},
+		setValue: (value) => {
+			instance.stdinWrite(`${clampValue(value)}`);
+		},
+		finish: () => {
+			instance.stdinEnd();
+		}
+	};
+};
+
 module.exports = {
-	info, error, warning, question, entry, password, color, open, save, directory
+	info, error, warning, question, entry, password, color, open, save, directory, progress
 };

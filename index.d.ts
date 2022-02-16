@@ -20,6 +20,22 @@ export interface DirectoryDialogOptions {
 	initial?: string;
 }
 
+export interface ProgressDialogOptions {
+	title: string;
+	text: string;
+	value?: number;
+	indeterminate?: boolean;
+	autoClose?: boolean;
+	noCancel?: boolean;
+}
+
+export interface ProgressDialogInstance {
+	promise: Promise<boolean>;
+	setText: (text: string) => void;
+	setValue: (value: number) => void;
+	finish: () => void;
+}
+
 export function setEncoding(encoding?: string | undefined): void;
 
 export function info(text: string, title: string): Promise<void>;
@@ -36,3 +52,5 @@ export function open(options: FileDialogOptions): Promise<string | null>;
 export function open(options: OpenDialogOptionsMulti): Promise<string[] | null>;
 export function save(options: FileDialogOptions): Promise<string | null>;
 export function directory(options: DirectoryDialogOptions): Promise<string | null>;
+
+export function progress(options: ProgressDialogOptions): ProgressDialogInstance;

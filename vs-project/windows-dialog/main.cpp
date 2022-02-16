@@ -4,6 +4,7 @@
 #include "openFile.h"
 #include "browseFolder.h"
 #include "inputBox.h"
+#include "progressBox.h"
 
 enum Type {
 	TYPE_INFO = '0',
@@ -16,6 +17,7 @@ enum Type {
 	TYPE_OPEN,
 	TYPE_SAVE,
 	TYPE_DIRECTORY,
+	TYPE_PROGRESS = 'A',
 };
 
 INT main(INT argc, CHAR* argv[]) {
@@ -55,6 +57,9 @@ INT main(INT argc, CHAR* argv[]) {
 		break;
 	case TYPE_DIRECTORY:
 		showBrowseFolder(argc, argv);
+		break;
+	case TYPE_PROGRESS:
+		showProgressBox(argc, argv);
 		break;
 	}
 

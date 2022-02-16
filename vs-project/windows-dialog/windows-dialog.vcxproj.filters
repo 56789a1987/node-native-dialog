@@ -36,6 +36,9 @@
     <ClCompile Include="inputBox.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="progressBox.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -62,6 +65,9 @@
     <ClInclude Include="winres.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="progressBox.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windows-dialog.rc">
@@ -70,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="windows-dialog.manifest">
-	  <Filter>Resource files</Filter>
-	</Manifest>
+      <Filter>Resource files</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>
