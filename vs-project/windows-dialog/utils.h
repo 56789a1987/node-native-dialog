@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <initguid.h>
+#include <ShlGuid.h>
 #include <ShlObj.h>
 #include <locale.h>
 

@@ -27,20 +27,3 @@ VOID localizeWindow(HWND hwnd) {
 		FreeLibrary(hMUser32);
 	}
 }
-
-// taskbar API for MinGW build and old OS
-BOOL createTaskbarInstance(ITaskbarList3** taskbar) {
-	BOOL succeeded = FALSE;
-	HMODULE hMOle32 = LoadLibraryW(L"Ole32.dll");
-	if (hMOle32) {
-		f_CoCreateInstance CoCreateInstance = (f_CoCreateInstance)GetProcAddress(hMOle32, "CoCreateInstance");
-		if (SUCCEEDED(CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_ALL, IID_ITaskbarList3, (LPVOID*)taskbar))) {
-			if (SUCCEEDED((*taskbar)->HrInit()))
-				succeeded = TRUE;
-			else
-				(*taskbar)->Release();
-		}
-		FreeLibrary(hMOle32);
-	}
-	return succeeded;
-}

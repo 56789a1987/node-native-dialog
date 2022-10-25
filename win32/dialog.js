@@ -164,9 +164,6 @@ const progress = (options) => {
 	if (options.indeterminate) {
 		args.push('-i');
 	}
-	if (options.autoClose) {
-		args.push('-a');
-	}
 	if (options.noCancel) {
 		args.push('-n');
 	}
@@ -178,9 +175,6 @@ const progress = (options) => {
 		},
 		setValue: (value) => {
 			instance.stdinWrite(`${clampValue(value)}`);
-		},
-		finish: () => {
-			instance.stdinWrite('-');
 		}
 	};
 };

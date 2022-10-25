@@ -4,11 +4,8 @@
 //
 #define IDR_RT_MANIFEST1                1
 #define IDD_INPUT_BOX                   106
-#define IDD_PROGRESS_BOX                107
 #define IDC_INPUT_BOX_EDIT              1001
 #define IDC_INPUT_BOX_LABEL             1002
-#define IDC_PROGRESS_BOX_PROGRESS       1003
-#define IDC_PROGRESS_BOX_LABEL          1004
 
 // Next default values for new objects
 // 

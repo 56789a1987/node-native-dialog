@@ -6,11 +6,11 @@ By native it means OS level in Node.js, not in the browser.
 
 ## Requirements
 
-Needs desktop environment, command line only environment is not supported.
+Needs desktop environment
 
 Supported platforms:
 
-- Windows (Windows XP or above, with the compiled binary included)
+- Windows (If the included binary is not compatible with your Windows, consider [compiling it from source](#compile-from-source))
 
 - Linux (requires `zenity`)
 
@@ -31,16 +31,15 @@ dialog.info('Hello world!', 'Message');
 ## API and examples
 
 - **info(text, title): Promise&lt;void&gt;**
-
 - **error(text, title): Promise&lt;void&gt;**
-
 - **warning(text, title): Promise&lt;void&gt;**
 
-  - `text` - string, required, the message
+  | Argument | Type   | Description       |
+  |----------|--------|-------------------|
+  | `text`   | string | The message       |
+  | `title`  | string | Text in title bar |
 
-  - `title` - string, required, title of the dialog box
-
-  Display a simple information / error / warning message box. The promise will resolve after the message box is closed.
+  Displays a simple information / error / warning message box.
 
   ![info](examples/images/info.png)
 
@@ -50,11 +49,12 @@ dialog.info('Hello world!', 'Message');
 
 - **question(text, title): Promise&lt;boolean&gt;**
 
-  - `text` - string, required, the message
+  | Argument | Type   | Description       |
+  |----------|--------|-------------------|
+  | `text`   | string | The message       |
+  | `title`  | string | Text in title bar |
 
-  - `title` - string, required, title of the dialog box
-
-  Display a OK/Cancel message box. Return true if OK is clicked. Return false if Cancel is clicked.
+  Displays a OK/Cancel message box. Returns true if OK is clicked, or false if Cancel is clicked.
 
   ![question](examples/images/question.png)
 
@@ -63,16 +63,15 @@ dialog.info('Hello world!', 'Message');
   ```
 
 - **entry(text, title, default): Promise&lt;string | null&gt;**
-
 - **password(text, title, default): Promise&lt;string | null&gt;**
 
-  - `text` - string, required, the message
+  | Argument  | Type    | Description                    |
+  |-----------|---------|--------------------------------|
+  | `text`    | string  | The message                    |
+  | `title`   | string  | Text in title bar              |
+  | `default` | string? | Default value of the input box |
 
-  - `title` - string, required, title of the dialog box
-
-  - `default` - string, optional, the default value of the text box
-
-  Display a message box that user can enter text in it. Return the text if OK is clicked. Return null if Cancel is clicked.
+  Displays a message box with an input box. Returns the text if OK is clicked, or null if Cancel is clicked.
 
   If `password` is used, the text box is a password box, characters are '*'.
 
@@ -86,15 +85,15 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  - `full` - boolean, optional, expand the full color picker by default
+  | Property    | Type      | Description                           |
+  |-------------|-----------|---------------------------------------|
+  | `full`      | boolean?  | Show the full color picker by default |
+  | `color`     | number?   | Default selected color                |
+  | `templates` | number[]? | Array of colors to display in the "Custom colors" field, 16 items at most, Windows only |
 
-  - `color` - number, optional, the default selected color
+  Displays the color picker. Returns the color if OK is clicked, or null if Cancel is clicked.
 
-  - `templates` - optional, an array of colors to display in the "Custom colors" field, 16 items at most, Windows only
-
-  Display the color picker dialog. Return the color if OK is clicked. Return null if Cancel is clicked.
-
-  Colors are in `0xRRGGBB` format.
+  Color format is `0xRRGGBB`.
 
   ![color](examples/images/color.png)
 
@@ -103,24 +102,21 @@ dialog.info('Hello world!', 'Message');
   ```
 
 - **open(options): Promise&lt;string | string[] | null&gt;**
-
 - **save(options): Promise&lt;string | null&gt;**
 
   *options:*
 
-  - `multiple` - boolean, optional, Open Dialog only, allow selecting multiple files
+  | Property    | Type        | Description                    |
+  |-------------|-------------|--------------------------------|
+  | `multiple`  | boolean?    | Allow selecting multiple files |
+  | `name`      | string?     | Default file name              |
+  | `title`     | string?     | Title of the file dialog       |
+  | `initial`   | string?     | Initial directory              |
+  | `filters`   | string[][]? | Array of file filters `[description, pattern 1, pattern 2, ...]` |
 
-  - `name` - string, optional, the default file name
+  Displays the open / save file dialog. Returns the absolute path if Open / Save is clicked, or null if Cancel is clicked.
 
-  - `title` - string, optional, set the title of the file dialog
-
-  - `initial` - string, optional, specify the initial directory when the dialog appears
-
-  - `filters` - optional, an array of file name filters (`[description, pattern 1, pattern 2, ...]`)
-
-  Display the open / save file dialog. Return the absolute path if Open / Save is clicked. Return null if Cancel is clicked.
-
-  If `multiple` is set to true for the open file dialog, the return value is an array of file paths.
+  If `multiple` is set to true for opening file, the return value is an array.
 
   ![file](examples/images/file.png)
 
@@ -137,11 +133,12 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  - `title` - string, optional, text to be displayed on the banner of the dialog
+  | Property  | Type    | Description                      |
+  |-----------|---------|----------------------------------|
+  | `title`   | string? | Text on the banner of the dialog |
+  | `initial` | string? | Initial directory                |
 
-  - `initial` - string, optional, specify the initial directory when the dialog appears
-
-  Display a file dialog that can only select folders. Return the absolute path if OK is clicked. Return null if Cancel is clicked.
+  Displays the select folder dialog. Returns the absolute path if OK is clicked, or null if Cancel is clicked.
 
   ![directory](examples/images/directory.png)
 
@@ -153,29 +150,26 @@ dialog.info('Hello world!', 'Message');
 
   *options:*
 
-  - `text` - string, required, the message
-
-  - `title` - string, required, title of the dialog box
-
-  - `value` - number, optional, the initial progress percentage
-
-  - `indeterminate` - boolean, optional, make the progress bar a marquee instead of the exact value, until `finish()` is called
-
-  - `autoClose` - boolean, optional, close the dialog automatically when `finish()` is called
-
-  - `noCancel` - boolean, optional, remove the cancel button, the dialog can only be closed when the progress is 100%
+  | Property        | Type     | Description        |
+  |-----------------|----------|--------------------|
+  | `text`          | string   | The message        |
+  | `title`         | string   | Text in title bar  |
+  | `value`         | number?  | Initial percentage |
+  | `indeterminate` | boolean? | Sets the progress bar to marquee mode. Use this when you wish to indicate that progress is being made, but the exact value is unknown |
+  | `noCancel`      | boolean? | Do not display a cancel button. The operation cannot be canceled |
 
   *instance:*
 
-  - `promise` - the original promise, resolves with true if OK is clicked, or false if Cancel is clicked
+  | Property   | Type     | Description        |
+  |------------|----------|--------------------|
+  | `promise`  | Promise&lt;boolean&gt;   | The original promise. Returns true if the progress is finished, or false if Cancel is clicked |
 
-  - `setText(text)` - change the message
+  | Method            | Description        |
+  |-------------------|--------------------|
+  | `setText(text)`   | Change the message |
+  | `setValue(value)` | Change the percentage. Setting progress to 100 will finish the progress and close the dialog  |
 
-  - `setValue(value)` - change the progress percentage
-
-  - `finish()` - set the percentage to 100%, this also disables the Cancel button and makes it stop accepting new values
-
-  Display an OK / Cancel dialog with a progress bar. The OK button can only be clicked when the progress is 100%.
+  Displays a progress bar dialog.
 
   ![progress](examples/images/progress.png)
 
@@ -187,27 +181,21 @@ dialog.info('Hello world!', 'Message');
 
   - `encoding` - string, optional, the encoding to use, or undefined to disable character transcoding
 
-  Specify the encoding of the console. Unicode characters may display incorrectly on Windows in some locales due to console encoding mismatch.
+  Specify the encoding of the console. Unicode characters may display incorrectly on Windows using some locales.
 
-  For example in simplified Chinese locale (GB2312 encoding), you need to use `setEncoding('gbk')` if unicode characters are incorrect in return values.
+  For example the simplified Chinese locale (GB2312 encoding), you need to use `setEncoding('gbk')` if unicode characters are incorrect in return values.
 
-*Example scripts are available in `/examples`, you can try them out by yourself.*
+More examples can be found in `/examples`
 
-## Compile the Windows version from source
+## Compile from source
 
-The source files can be found in `/vs-project`. You can use Visual Studio to edit and build. Make sure you selected the Release configuration.
-
-You can also use MinGW to build. To do so, you need to have [mingw-w64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/) in your PATH, then run `build-mingw.bat`. The built binary has better native compatibility across multiple Windows versions in this way.
+The source codes of the required Windows executable can be found in `/vs-project`. It's a Visual Studio project.
 
 ## Known issues
 
 - This is still experimental and there might be issues.
 
 - The promise rejects if the dialog process fails to start or exits unexpectedly. Add error handling if you're using it in a critical process.
-
-## Contributing
-
-Contributing is open. Open an issue, or comment on an existing one before starting a PR, if you want the best chance of it being accepted. (I don't want to see wasted effort)
 
 ## License
 

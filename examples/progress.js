@@ -18,10 +18,7 @@ async function main() {
 	setTimeout(() => prog.setValue(50), 5000);
 	setTimeout(() => prog.setValue(75), 6000);
 	setTimeout(() => prog.setText('Registering components...'), 7000);
-	setTimeout(() => {
-		prog.setText('Finished');
-		prog.finish();
-	}, 8000);
+	setTimeout(() => prog.setValue(100), 8000);
 
 	const value = await prog.promise;
 	if (!value) {

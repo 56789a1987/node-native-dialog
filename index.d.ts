@@ -25,7 +25,6 @@ export interface ProgressDialogOptions {
 	text: string;
 	value?: number;
 	indeterminate?: boolean;
-	autoClose?: boolean;
 	noCancel?: boolean;
 }
 
@@ -33,7 +32,6 @@ export interface ProgressDialogInstance {
 	promise: Promise<boolean>;
 	setText: (text: string) => void;
 	setValue: (value: number) => void;
-	finish: () => void;
 }
 
 export function setEncoding(encoding?: string | undefined): void;

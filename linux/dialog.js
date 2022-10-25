@@ -139,7 +139,7 @@ function clampValue(value) {
 }
 
 const progress = (options) => {
-	const args = ['--progress'];
+	const args = ['--progress', '--auto-close'];
 	if (options.title !== undefined) {
 		args.push('--title', `${options.title}`);
 	}
@@ -152,9 +152,6 @@ const progress = (options) => {
 	if (options.indeterminate) {
 		args.push('--pulsate');
 	}
-	if (options.autoClose) {
-		args.push('--auto-close');
-	}
 	if (options.noCancel) {
 		args.push('--no-cancel');
 	}
@@ -165,10 +162,11 @@ const progress = (options) => {
 			instance.stdinWrite(`# ${text}`.replace(/\r?\n/g, ' '));
 		},
 		setValue: (value) => {
-			instance.stdinWrite(`${clampValue(value)}`);
-		},
-		finish: () => {
-			instance.stdinEnd();
+			value = clampValue(value);
+			instance.stdinWrite(`${value}`);
+			if (value === 100) {
+				instance.stdinEnd();
+			}
 		}
 	};
 };
