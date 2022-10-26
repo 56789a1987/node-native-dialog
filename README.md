@@ -177,6 +177,22 @@ dialog.info('Hello world!', 'Message');
   progress({ title: 'Installing', text: 'Copying files...', value: 50 })
   ```
 
+- **notification(text, title?, icon?): Promise&lt;void&gt;**
+
+  | Argument | Type    | Description                       |
+  |----------|---------|-----------------------------------|
+  | `text`   | string  | The message                       |
+  | `title`  | string? | Notification title (Windows only) |
+  | `icon`   | string? | info/warning/error                |
+
+  Displays a notification in system tray.
+
+  ![notification](examples/images/notification.png)
+
+  ```js
+  notification('This is a notification message', 'Notification', 'info');
+  ```
+
 - **setEncoding(encoding)**
 
   - `encoding` - string, optional, the encoding to use, or undefined to disable character transcoding

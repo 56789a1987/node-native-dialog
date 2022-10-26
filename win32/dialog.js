@@ -17,6 +17,7 @@ const DialogType = {
 	Save: '8',
 	Directory: '9',
 	Progress: 'A',
+	Notification: 'B',
 };
 
 const info = async (text, title) => {
@@ -179,6 +180,25 @@ const progress = (options) => {
 	};
 };
 
+const notification = async (text, title, icon) => {
+	const args = [DialogType.Notification, '-m', `${text}`, ];
+	if (title) {
+		args.push('-t', `${title}`);
+	}
+	switch (icon) {
+		case 'info':
+			args.push('-i');
+			break;
+		case 'warning':
+			args.push('-w');
+			break;
+		case 'error':
+			args.push('-e');
+			break;
+	}
+	await run(args);
+}
+
 module.exports = {
-	info, error, warning, question, entry, password, color, open, save, directory, progress
+	info, error, warning, question, entry, password, color, open, save, directory, progress, notification
 };

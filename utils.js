@@ -61,5 +61,6 @@ module.exports.unsupportedPlatform = {
 	open: unsupported,
 	save: unsupported,
 	directory: unsupported,
-	progress: unsupported
+	progress: unsupported,
+	notification: unsupported,
 };

@@ -171,6 +171,22 @@ const progress = (options) => {
 	};
 };
 
+const notification = async (text, title, icon) => {
+	const args = ['--notification', '--text', `${text}`, ];
+	switch (icon) {
+		case 'info':
+			args.push('--window-icon', 'dialog-information');
+			break;
+		case 'warning':
+			args.push('--window-icon', 'dialog-warning');
+			break;
+		case 'error':
+			args.push('--window-icon', 'dialog-error');
+			break;
+	}
+	await run(args);
+}
+
 module.exports = {
-	info, error, warning, question, entry, password, color, open, save, directory, progress
+	info, error, warning, question, entry, password, color, open, save, directory, progress, notification
 };

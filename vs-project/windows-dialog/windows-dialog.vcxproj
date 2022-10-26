@@ -165,6 +165,7 @@
     <ClCompile Include="browseFolder.cpp" />
     <ClCompile Include="inputBox.cpp" />
     <ClCompile Include="messageBox.cpp" />
+    <ClCompile Include="notification.cpp" />
     <ClCompile Include="openFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -175,11 +176,11 @@
     <ClInclude Include="chooseColor.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="messageBox.h" />
+    <ClInclude Include="notification.h" />
     <ClInclude Include="openFile.h" />
     <ClInclude Include="progressBox.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="utils.h" />
-    <ClInclude Include="winres.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windows-dialog.rc" />

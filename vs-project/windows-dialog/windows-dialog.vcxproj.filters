@@ -39,6 +39,9 @@
     <ClCompile Include="progressBox.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="notification.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -62,10 +65,10 @@
     <ClInclude Include="inputBox.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="winres.h">
+    <ClInclude Include="progressBox.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="progressBox.h">
+    <ClInclude Include="notification.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

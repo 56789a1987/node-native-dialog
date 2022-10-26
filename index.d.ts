@@ -52,3 +52,4 @@ export function save(options: FileDialogOptions): Promise<string | null>;
 export function directory(options: DirectoryDialogOptions): Promise<string | null>;
 
 export function progress(options: ProgressDialogOptions): ProgressDialogInstance;
+export function notification(text: string, title?: string, icon?: 'info' | 'warning' | 'error'): Promise<void>;
